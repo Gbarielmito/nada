@@ -1,5 +1,11 @@
 {
+  "name": "samuprojeto",
+  "lockfileVersion": 3,
+  "requires": true,
   "dependencies": {
     "firebase": "^11.0.2"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
