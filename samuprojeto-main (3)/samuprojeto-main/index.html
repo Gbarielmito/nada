@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./csschatbox/chat.css">
+    <link rel="stylesheet" href="./popveri.css">
+    <link rel="stylesheet" href="./popform.css">
+    <link rel="stylesheet" href="./poplermais.css">
+    <title>Samu Conect</title>
+  </head>
+  <body>
+    <header>
+      <nav class="section__container nav__container">
+        <img src="./assets/samu.png" alt="" class="logosamu">
+        <ul class="nav__links">
+          <li class="link"><a href="#home">Inicio</a></li>
+          <li class="link"><a href="#about">Quem somos</a></li>
+          <li class="link"><a href="#servi">Serviços</a></li>
+        </ul>
+          <button class="btn" onclick="openPopup()">Emergência</button>
+  
+          <div class="overlay" onclick="closePopup()" id="overlay"></div>
+            <div class="popup" id="popupForm">
+              <h3>Informações de Emergência</h3>
+              <label for="nome">Nome Completo do Paciente:</label>
+              <input type="text" id="nome" name="nome" placeholder="Digite o nome completo">
+            
+              <label for="ocorrencia">Ocorrência do Chamado:</label>
+              <input type="text" id="ocorrencia" name="ocorrencia" placeholder="Descreva a ocorrência">
+            
+              <label for="local">Local do Acontecido:</label>
+              <input type="text" id="local" name="local" placeholder="Digite o local" readonly>
+            
+              <label for="photo">Enviar Arquivo de Midia:</label>
+              <input type="file" id="photo" name="photo" accept="image/*">
+            
+             <a href="tel:192"><button onclick="openVerificationPopup()">Concluir chamado de emergência</button></a>
+            </div>
+            
+
+            <script src="./scripts/database.js"></script>
+
+            <script src="./scripts/fecharpopambu.js"> /* função para fechar quando clicar em chamar a ambulancia */</script>
+
+            <script src="./scripts/fecharpopemer.js">// Função para fechar o pop-up de Emergência</script>
+          </div>
+          
+          <script src="./scripts/localizacao.js">// Função para obter a localização</script>
+          
+        
+      </nav>
+      
+      <div class="section__container header__container" id="home">
+        <div class="header__content">
+          <h1>Faça sua verificação para entrar em contato com a samu</h1>
+          <p>Bem-vindo, onde experiências excepcionais do paciente são nossa prioridade.</p>
+        </div>
+        <div class="header__form">
+          <form id="verificationForm">
+            <h4>Verificação de identidade</h4>
+            <input type="text" id="cpf" placeholder="Número do CPF" />
+            <input type="text" id="fullName" placeholder="Nome Completo" />
+            <input type="text" id="age" placeholder="Idade" />
+            <input type="text" id="phone" placeholder="Telefone" />
+            <button type="submit" class="btn form__btn" id="enviarBtn">Concluir Verificação</button>
+
+            
+            <div id="verificationPopup" class="popup-overlay">
+              <div class="popup-content">
+                <h3>Chamado de emergência enviado com sucesso</h3>
+                <p>Confirme que você concluiu a verificação dos dados.</p>
+                
+                <button onclick="submitFeedback()">Enviar Feedback</button>
+                <button onclick="closeVerificationPopup(event)">Fechar</button>
+
+              </div>
+            </div>
+          </form>
+
+          <script src="./scripts/validarcpf.js"></script>
+          <div id="verificationResult"></div>
+        </div>
+      </div>
+    </header>
+  </body>
+      
+  <div class="chatbox">
+      <div class="chatbox__support">
+          <div class="chatbox__header">Solicitações de emergência</div>
+          <div class="chatbox__messages" id="emergencyRequests">
+              <!-- Dados serão inseridos aqui -->
+          </div>
+          <div class="chatbox__footer">
+              <button class="btnsoli" onclick="cancelarEmergencia()">Cancelar emergência</button>
+          </div>
+      </div>
+      <div class="chatbox__button">
+          <button class="msg" onclick="toggleChat()">Caixa De Mensagens</button>
+      </div>
+  </div>
+  
+  
+    <script src="./scripts/caixademsg.js"></script>
+
+    <div class="chatbox__support" style="display: none;">
+        <div class="content"></div>
+    </div>
+
+
+  
+  
+
+  
+
+  
+
+    <section class="section__container service__container" id="service">
+      <div class="service__header">
+        <div class="service__header__content">
+          <h2 class="section__header">Dicas de primeiros socorros</h2>
+          <p>
+            O SAMU (Serviço de Atendimento Móvel de Urgência) recomenda algumas práticas básicas de primeiros socorros que qualquer pessoa pode seguir em caso de emergência. Aqui estão algumas dicas:
+          </p>
+        </div>
+        <button class="service__btn">Ler Mais</button>
+      </div>
+
+      <div id="moreInfoPopup" class="popup-overlai" style="display: none;">
+        <div class="popup-contenti">
+          <span><i class="ri-error-warning-line"></i></span>
+          <h3>Mais Informações</h3>
+          <p>Em situações de emergência, é fundamental manter a calma e agir rapidamente para garantir a segurança da vítima até que o atendimento especializado chegue. <br> No caso de parada cardiorrespiratória, inicie compressões no tórax da pessoa, pressionando com força e ritmo constante. <br> Para engasgos, aplique a manobra de Heimlich ou, em bebês, utilize tapas nas costas e compressões no peito. <br> Se houver sangramento intenso, pressione o local com um pano limpo para controlar a hemorragia. <br>
+            Em queimaduras, lave a área com água em temperatura ambiente e cubra com um pano limpo, evitando qualquer substância inadequada. <br> Durante convulsões, proteja a vítima, deite-a de lado e evite segurar ou colocar algo em sua boca. <br> Se houver suspeita de fratura, imobilize o membro afetado sem movimentá-lo. <br> Em casos de choque elétrico, desligue a fonte de energia ou afaste a pessoa usando objetos não condutores. <br>
+            Acima de tudo, entre em contato com o SAMU pelo número 192, fornecendo informações claras sobre o ocorrido e o estado da vítima, garantindo que o socorro seja ágil e eficaz.</p>
+          <button onclick="closeMoreInfoPopup()">Fechar</button>
+        </div>
+      </div>
+
+      <div class="service__grid">
+        <div class="service__card">
+          <span><i class="ri-fire-line"></i></span>
+          <h4>Queimaduras</h4>
+          
+           <p>Queimadura de Primeiro Grau: Resfrie a área com água corrente por 10-20 minutos. Evite gelo, pois pode agravar a lesão.</p>
+           <p>Queimadura Grave: Não retire roupas grudadas na pele e cubra a área com um pano limpo até o atendimento.</p>
+          
+           <button class="service__btndois">Ler Mais</button>
+        </div>
+
+        <div id="moreInfoPopupdois" class="popup-overlai" style="display: none;">
+          <div class="popup-contenti">
+            <span><i class="ri-fire-line"></i></span>
+            <h3>Qeuimaduras</h3>
+            <p>Queimaduras exigem cuidados imediatos para minimizar danos. Em casos de queimaduras térmicas, lave a área com água corrente fria por 10-20 minutos, sem usar gelo, e cubra com gaze limpa para evitar infecções, deixando bolhas intactas. Em queimaduras químicas, remova a substância com água abundante e retire roupas contaminadas, protegendo a área. Queimaduras elétricas requerem desligar a fonte de energia antes de tocar na vítima e buscar atendimento médico imediato, pois podem causar danos internos. Para queimaduras solares, resfrie a pele com compressas frias, hidrate com loções e beba bastante água. Nunca aplique produtos caseiros como manteiga ou pasta de dente e procure um médico se a queimadura for grave, afetar áreas sensíveis ou apresentar sinais de infecção. Agir rápido é essencial para aliviar a dor e proteger a pele.</p>
+            <button onclick="closeMoreInfoPopupdois()">Fechar</button>
+          </div>
+        </div>
+
+        <div class="service__card">
+          <span><i class="ri-service-line"></i></span>
+          <h4>Parada Cardiorrespiratória</h4>
+          <p>
+            Verifique se a pessoa responde e se está respirando. Caso contrário, inicie a RCP. A sequência é 30 compressões no peito seguidas de 2 insuflações (ventilação boca a boca).
+          </p>
+          <button class="service__btntres">Ler Mais</button>
+        </div>
+
+        <div id="moreInfoPopuptres" class="popup-overlai" style="display: none;">
+          <div class="popup-contenti">
+            <span><i class="ri-service-line"></i></span>
+            <h3>Parada Cardiorrespiratória</h3>
+            <p>
+              Em caso de parada cardíaca, agir rapidamente é essencial para aumentar as chances de sobrevivência. Primeiro, verifique se a pessoa responde e respira; caso contrário, chame imediatamente os serviços de emergência e comece a reanimação cardiopulmonar (RCP). Posicione as mãos no centro do tórax da vítima e faça compressões firmes e rápidas, mantendo um ritmo de 100 a 120 compressões por minuto, permitindo que o tórax retorne à posição normal entre as compressões. Se possível, utilize um desfibrilador externo automático (DEA) assim que disponível, seguindo as instruções do aparelho. Continue a RCP até que a pessoa volte a respirar ou que os serviços médicos assumam o atendimento. Evite perder tempo com verificações desnecessárias e concentre-se em manter o fluxo sanguíneo com compressões constantes.</p>
+            <button onclick="closeMoreInfoPopuptres()">Fechar</button>
+          </div>
+        </div>
+
+        <div class="service__card">
+          <span><i class="ri-lungs-line"></i></span>
+          <h4>Emergências Respiratórias</h4>
+          
+           <p> Engasgo: Se alguém estiver engasgado, incentive a pessoa a tossir. Se isso não funcionar e a pessoa estiver consciente, realize a Manobra de Heimlich.</p>
+           <p> Parada Respiratória: Se a pessoa não estiver respirando, inicie a RCP (ressuscitação cardiopulmonar). Posicione suas mãos sobre o peito da vítima e faça compressões fortes e rápidas.</p>
+          
+           <button class="service__btnquatro">Ler Mais</button>
+        </div>
+
+        <div id="moreInfoPopupquatro" class="popup-overlai" style="display: none;">
+          <div class="popup-contenti">
+            <span><i class="ri-lungs-line"></i></span>
+            <h3>Emergências Respiratórias</h3>
+            <p>
+              Em emergências respiratórias, como dificuldade para respirar, agir rapidamente é crucial. Verifique se a pessoa está consciente e procure sinais de obstrução ou esforço respiratório. Se houver engasgo, tente estimular a tosse, e, se necessário, realize a manobra de Heimlich para desobstruir as vias aéreas. Em casos de asma ou alergia grave, ajude a administrar a medicação, como broncodilatadores ou epinefrina, se disponível. Se a pessoa parar de respirar, inicie a ventilação de resgate, inclinando a cabeça para trás, selando a boca e oferecendo respirações lentas e profundas, enquanto observa o tórax subir. Chame os serviços de emergência imediatamente em qualquer situação de respiração anormal ou ausência de respiração, mantendo a pessoa calma e em posição confortável até a chegada do socorro.</p>
+            <button onclick="closeMoreInfoPopupquatro()">Fechar</button>
+          </div>
+        </div>
+
+        <div class="service__card">
+          <span><i class="ri-mental-health-line"></i></span>
+          <h4>Crise Convulsiva</h4>
+          <p>
+            Deite a pessoa de lado em uma superfície segura e retire objetos ao redor. Não tente conter os movimentos nem coloque nada na boca da pessoa.
+          </p>
+          <button class="service__btncinco">Ler Mais</button>
+        </div>
+
+        <div id="moreInfoPopupcinco" class="popup-overlai" style="display: none;">
+          <div class="popup-contenti">
+            <span><i class="ri-mental-health-line"></i></span>
+            <h3>Crise Convulsiva</h3>
+            <p>
+              Em uma crise convulsiva, mantenha a calma e proteja a pessoa de lesões. Deite-a em um local seguro, afastando objetos perigosos ao redor, e coloque-a de lado para evitar sufocamento, mas sem forçar movimentos ou segurar a pessoa. Não coloque nada na boca, pois isso pode causar ferimentos. Após o fim da crise, verifique se a pessoa está respirando normalmente e ofereça conforto enquanto ela se recupera, já que a desorientação é comum. Chame os serviços de emergência se a crise durar mais de cinco minutos, se for a primeira vez, se ocorrer após um trauma ou se a pessoa não recuperar a consciência. Mantenha-se atento e esteja preparado para dar mais informações ao socorro médico.</p>
+            <button onclick="closeMoreInfoPopupcinco()">Fechar</button>
+          </div>
+        </div>
+
+        <div class="service__card">
+          <span><i class="ri-psychotherapy-line"></i></span>
+          <h4>Desmaio</h4>
+          <p>Deite a Pessoa: Coloque-a deitada de costas e eleve as pernas.</p>
+          <p>Afrouxe Roupa Apertada: Isso ajuda a melhorar a circulação.</p>
+          <p>Recuperação: Quando ela acordar, deixe-a sentada devagar, evitando que se levante rapidamente.</p>
+          
+          <button class="service__btnseis">Ler Mais</button>
+        </div>
+
+        <div id="moreInfoPopupseis" class="popup-overlai" style="display: none;">
+          <div class="popup-contenti">
+            <span><i class="ri-psychotherapy-line"></i></span>
+            <h3>Desmaio</h3>
+            <p>
+              Em casos de desmaio, a prioridade é garantir a segurança da pessoa e evitar lesões. Deite-a de costas em um local seguro, elevando as pernas para melhorar o fluxo sanguíneo e prevenir a perda de consciência. Afrouxe roupas apertadas, como cintos ou gravatas, para facilitar a respiração e circulação. Mantenha a pessoa calma e confortável, evitando movimentos bruscos ou tentativas de levantar-se rapidamente. Ofereça água e alimentos leves após a recuperação, mas evite forçar a ingestão. Se o desmaio for recorrente, dura mais de um minuto ou ocorre após um trauma, procure ajuda médica para investigar a causa e receber orientações sobre prevenção. Esteja atento a sinais de alerta e mantenha a pessoa sob observação até que se sinta melhor.</p>
+            <button onclick="closeMoreInfoPopupseis()">Fechar</button>
+          </div>
+
+      </div>
+    </section>
+    <section class="section__container about__container" id="about">
+      <div class="about__content">
+        <h2 class="section__header">Quem somos</h2>
+        <p>
+          Bem-vindo ao nosso site de atendimento da samu, seu atendimento único e rapido para
+          seus cuidados de saúde. Estamos comprometidos
+          para promover o bem-estar e fornecer recursos valiosos para capacitá-lo
+          em sua jornada de saúde.
+        </p>
+        <p>
+          Explore nossa extensa coleção de artigos escritos por especialistas e
+          Guias que cobrem uma ampla gama de tópicos de primeiros socorros. Da compreensão
+          condições de primeiros socorros comuns a dicas para ajudar a pessoa enquanto a samu chega,
+          Nosso conteúdo é projetado para educar, informar e ter o atendimento mais rapido para você.
+      </div>
+      <div class="about__image">
+        <img src="assets/homemsamu.jpg" alt="" />
+      </div>
+    </section>
+
+    <section class="section__container why__container" id="blog">
+      <div class="why__image">
+        <img src="assets/gruposamu.jpeg" alt="" />
+      </div>
+      <div class="why__content">
+        <h2 class="section__header">Porque escolher-nos</h2>
+        <p>
+          Com um compromisso inabalável com o seu bem-estar, nossa equipe de
+          profissionais de saúde treinados garantem que você receba
+          experiências excepcionais para você.
+        </p>
+        <div class="why__grid">
+          <span><i class="ri-phone-line"></i></span>
+          <div>
+            <h4>Suporte Chat 24h</h4>
+            <p>
+              O suporte 24 horas de atendimento é um dos grandes pilares do sistema de emergências e uma verdadeira tranquilidade para a população. Saber que, em qualquer momento do dia ou da noite, há uma equipe preparada para responder a uma emergência é uma segurança incalculável.
+            </p>
+          </div>
+          <span><i class="ri-car-washing-line"></i></span>
+          <div>
+            <h4>Mais de 50 Ambulâncias ativas</h4>
+            <p>
+              O serviço de ambulâncias é um verdadeiro salvador de vidas, essencial para garantir atendimento rápido e eficiente em momentos críticos. Quando uma emergência acontece, seja um acidente, uma crise de saúde súbita ou uma complicação grave, as ambulâncias chegam como uma resposta ágil, trazendo alívio e esperança.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <img src="./assets/samu.png" alt="" class="logosamu">
+          <p>
+            Estamos honrados em fazer parte de sua jornada de saúde e comprometidos
+            para fornecer cuidados compassivos, personalizados e de alto nível a cada
+            passo do caminho.
+          </p>
+          <p>
+            Confie-nos com sua saúde e deixe-nos trabalhar juntos para alcançar o
+            melhores resultados possíveis para você e seus entes queridos.
+          </p>
+        </div>
+        <div class="footer__col">
+          <h4>Serviços</h4>
+          <button class="service__term">Termos de pesquisa</button>
+          <button class="service__pesq">Pesquisa avançada</button>
+          <button class="service__poli">Política de privacidade</button>
+        </div>
+
+        <div id="moreInfoPopupterm" class="popup-overlai" style="display: none;">
+          <div class="popup-contenti">
+            <span><i class="ri-file-search-line"></i></span>
+            <h3>Termos de pesquisa</h3>
+            <p>
+              Aqui, oferecemos uma abordagem detalhada e completa para atender às necessidades do mercado, com foco em lhe ajudar a ter um atendimento bem mais rapido e excelência. Descubra como nossos serviços especializados, aliando tecnologia de ponta e expertise do setor, podem transformar desafios complexos em oportunidades reais em te ajudar. Navegue por nossos conteúdos, conheça nossos cases de sucesso e explore recursos desenvolvidos.</p>
+            <button onclick="closeMoreInfoPopupterm()">Fechar</button>
+          </div>
+        </div>
+
+        <div id="moreInfoPopuppesq" class="popup-overlai" style="display: none;">
+          <div class="popup-contenti">
+            <span><i class="ri-user-search-line"></i></span>
+            <h3>Pesquisas avançadas</h3>
+            <p>
+              As pesquisas avançadas realizadas pelo SAMU (Serviço de Atendimento Móvel de Urgência) buscam constantemente melhorar a qualidade do atendimento e otimizar os processos de emergência médica. Estas pesquisas incluem o desenvolvimento de novas tecnologias para a comunicação e coordenação entre equipes de resgate, aprimoramento de técnicas de triagem e atendimento no local, além da implementação de sistemas mais eficazes de transporte e acompanhamento de pacientes críticos. O objetivo é reduzir o tempo de resposta, aumentar a eficiência no tratamento e salvar mais vidas. Além disso, o SAMU investe em estudos sobre prevenção, capacitação de profissionais e avaliação contínua dos resultados para garantir que os protocolos adotados estejam sempre alinhados às melhores práticas internacionais de saúde e emergência.</p>
+            <button onclick="closeMoreInfoPopuppesq()">Fechar</button>
+          </div>
+        </div>
+
+        <div id="moreInfoPopuppoli" class="popup-overlai" style="display: none;">
+          <div class="popup-contenti">
+            <span><i class="ri-git-repository-private-line"></i></span>
+            <h3>Politica de privacidade</h3>
+            <p>
+              A política de privacidade do SAMU (Serviço de Atendimento Móvel de Urgência) visa garantir a proteção e a confidencialidade dos dados pessoais e informações dos usuários durante o atendimento de emergência. Ela define como os dados são coletados, armazenados e utilizados, assegurando que as informações compartilhadas com o SAMU sejam usadas exclusivamente para a prestação de serviços médicos e o cumprimento das obrigações legais. A política também destaca o compromisso do SAMU em respeitar a privacidade dos pacientes, com medidas de segurança para evitar o acesso não autorizado aos dados sensíveis. Além disso, a política orienta sobre o direito dos usuários de acessar, corrigir ou excluir suas informações pessoais, quando aplicável, e como podem fazer isso de maneira segura.</p>
+            <button onclick="closeMoreInfoPopuppoli()">Fechar</button>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4>Contate-nos</h4>
+          <a href="email:samu192@gmail.com"><p><i class="ri-mail-fill"></i> samu192@gmail.com</p></a>
+          <a href="tel:192"><p><i class="ri-phone-fill"></i> 192</p></a>
+        </div>
+      </div>
+      <div class="footer__bar" id="servi">
+        <div class="footer__bar__content">
+          <div class="footer__socials">
+            <span><i class="ri-instagram-line"></i></span>
+            <span><i class="ri-facebook-fill"></i></span>
+            <span><i class="ri-heart-fill"></i></span>
+            <span><i class="ri-twitter-fill"></i></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./scripts/popinfomais.js"></script>
+    <script src="./scripts/popumler.js"></script>
+    <script src="./scripts/popdoisler.js"></script>
+    <script src="./scripts/poptresler.js"></script>
+    <script src="./scripts/popquatroler.js"></script>
+    <script src="./scripts/popcincoler.js"></script>
+    <script src="./scripts/popterm"></script>
+    <script src="./scripts/poppesq.js"></script>
+    <script src="./scripts/poppoli.js"></script>
+  </body>
+</html>
